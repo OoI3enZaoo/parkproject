@@ -1,0 +1,142 @@
+
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+    <meta name="description" content="" />
+    <meta name="author" content="" />
+    <!--[if IE]>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+        <![endif]-->
+    <title>Free Responsive Admin Theme - ZONTAL</title>
+    <!-- BOOTSTRAP CORE STYLE  -->
+    <link href="assets/css/bootstrap.css" rel="stylesheet" />
+    <!-- FONT AWESOME ICONS  -->
+    <link href="assets/css/font-awesome.css" rel="stylesheet" />
+    <!-- CUSTOM STYLE  -->
+    <link href="assets/css/style.css" rel="stylesheet" />
+
+
+    <link href="bower_components/album/album.css" rel="stylesheet">
+    <script src="assets/js/jquery-1.11.1.js"></script>
+
+    <script src="assets/js/bootstrap.js"></script>
+
+</head>
+
+<body>
+    <header>
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <h4>อุทยานแห่งประเทศไทย</h4>
+
+                </div>
+
+            </div>
+        </div>
+    </header>
+
+    <section class="menu-section">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="navbar-collapse collapse ">
+                        <ul id="menu-top" class="nav navbar-nav navbar-right">
+                            <li><a class="menu-top-active" href="home">หน้าหลัก</a></li>
+                            <li><a href="map">แผนที่</a></li>
+                            <li><a href="contact">ติดต่อเรา</a></li>
+
+                        </ul>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+    <!-- MENU SECTION END-->
+    <div class="content-wrapper">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <h4 class="page-head-line">หน้าหลัก</h4>
+
+                </div>
+
+
+            </div>
+
+            <div class="row">
+               <div class="col-md-12">
+                   <div class="alert alert-success">
+                       อุทยานแห่งชาติในประเทศไทย.
+                   </div>
+               </div>
+
+           </div>
+
+            <div class = "row">
+                <div class ="col-md-12">
+                  <div id="album"></div>
+
+                </div>
+            </div>
+
+
+
+
+        </div>
+    </div>
+
+
+    <!-- CONTENT-WRAPPER SECTION END-->
+    <footer>
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    &copy; 2015 YourCompany | By : <a href="http://www.designbootstrap.com/" target="_blank">DesignBootstrap</a>
+                </div>
+
+            </div>
+        </div>
+    </footer>
+
+
+
+
+
+
+
+
+
+    <script>
+        $(function() {
+
+
+            $.getJSON("http://localhost:1337/api/pic_info", function(result) {
+                if (result.length != 0) {
+
+
+                    for (i = 0; i < result.length; i++) {
+                        var opencard = "<div class='card'> ";
+                        var img = "<img src='"+result[i].url+"'  class='img-responsive' alt='Card image cap' width='600' height='400'> ";
+                        var cardtext = "<p class='card-text'>This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p> ";
+                        var closecard = "</div>";
+                        var output =  opencard + img + cardtext + closecard;
+                        $("#album").append(output);
+                        console.log("output: " + output);
+                    }
+
+                }
+
+            });
+
+        });
+    </script>
+
+
+</body>
+
+</html>

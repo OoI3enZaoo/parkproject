@@ -1,6 +1,7 @@
 var express = require('express');
 var mysql = require('mysql');
 var app = express();
+var path = require('path');
 var connection = mysql.createConnection({
     host: "localhost",
     user: "root",
@@ -13,7 +14,8 @@ connection.connect(function(error) {
     } else {
         console.log("Connect");
     }
-})
+});
+app.use(express.static(path.join(__dirname, 'public')));
 
 app.get('/api/park_tb', function(req, resp) {
   connection.query("SELECT * FROM park_tb", function(error, rows, fields){
@@ -58,10 +60,7 @@ app.get('/api/admin', function(req, resp) {
     }
   });
 });
-
-
 app.get('/api/picfromid=:id', function(req, resp) {
-
   connection.query("SELECT * FROM pic_info where id = "+ req.params.id , function(error, rows, fields){
     if (error) {
         console.log("Error query");
@@ -71,5 +70,12 @@ app.get('/api/picfromid=:id', function(req, resp) {
     }
   });
 });
+app.get('/home',function(req,res){
+  res.sendFile(path.join(__dirname + '/views/index.html'));
+});
+app.get('/map',function(req,res){
+  res.sendFile(path.join(__dirname + '/views/map.html'));
+});
+
 
 app.listen(1337);
