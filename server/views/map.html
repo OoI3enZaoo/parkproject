@@ -9,29 +9,35 @@
     <!--[if IE]>
         <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
         <![endif]-->
-    <title>Free Responsive Admin Theme - ZONTAL</title>
-    <!-- BOOTSTRAP CORE STYLE  -->
-    <link href="assets/css/bootstrap.css" rel="stylesheet" />
-    <!-- FONT AWESOME ICONS  -->
-    <link href="assets/css/font-awesome.css" rel="stylesheet" />
-    <!-- CUSTOM STYLE  -->
-    <link href="assets/css/style.css" rel="stylesheet" />
-
-
+    <title>อุทยานแห่งชาติ</title>
+    <link href="bower_components/bootstrap/dist/css/bootstrap.css" rel="stylesheet" />
+    <link href="bower_components/css/style.css" rel="stylesheet" />
     <link href="bower_components/album/album.css" rel="stylesheet">
-    <script src="assets/js/jquery-1.11.1.js"></script>
+    <script src="bower_components/jquery/dist/jquery.js"></script>
+    <script src="bower_components/bootstrap/dist/js/bootstrap.js"></script>
+    <link href="https://fonts.googleapis.com/css?family=Mitr" rel="stylesheet">
+    <script src="bower_components/bootstrap-notify/js/bootstrap-notify.js"></script>
+    <link href="bower_components/bootstrap-notify/css/bootstrap-notify.css" rel="stylesheet" />
 
-    <script src="assets/js/bootstrap.js"></script>
 
 
 </head>
 <style>
+    body {
+        font-family: 'Mitr', sans-serif;
+    }
+
     #map {
         position: relative;
         width: 100%;
         height: 88vh;
         margin: 0;
         padding: 0;
+    }
+
+    #map2 {
+        width: 100% !important;
+        height: 50vh;
     }
 </style>
 
@@ -41,9 +47,7 @@
             <div class="row">
                 <div class="col-md-12">
                     <h4>อุทยานแห่งประเทศไทย</h4>
-
                 </div>
-
             </div>
         </div>
     </header>
@@ -54,9 +58,12 @@
                 <div class="col-md-12">
                     <div class="navbar-collapse collapse ">
                         <ul id="menu-top" class="nav navbar-nav navbar-right">
-                            <li><a href="index.html">หน้าหลัก</a></li>
-                            <li><a class="menu-top-active" href="map.html">แผนที่</a></li>
-                            <li><a href="contact.html">ติดต่อเรา</a></li>
+                            <li><a href="home">หน้าหลัก</a></li>
+                            <li><a class="menu-top-active" href="map">แผนที่</a></li>
+                            <li><a href="contact">ติดต่อเรา</a></li>
+                            <li><a id="loginstatus" onclick="loginButton()">ลงชื่อเข้าใช้</a></li>
+
+
 
                         </ul>
                     </div>
@@ -88,16 +95,106 @@
 
             <div class="row">
                 <div class="col-md-12">
-                    <div id="map"></div>
+                    <div id="map">&nbsp;</div>
 
                 </div>
             </div>
-
-
-
-
         </div>
     </div>
+
+    <!-- Modal -->
+    <div class="modal fade" id="modalNavigate" role="dialog">
+        <div class="modal-dialog">
+            <!-- Modal content-->
+            <div class="modal-content" style="width: 800px; height: 550px;">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title text-primary">ระบบการทำทาง</h4>
+                </div>
+                <div class="modal-body" style: "height: 100px">
+                    <form>
+                        <div class="form-group">
+
+                            <label for="ตำแหน่งต้นทาง" class="form-control-label">ตำแหน่งต้นทาง:</label>
+                            <img class="img-rounded" src="http://sysnet.utcc.ac.th/aparcas/icon/start_flag80.png" style="width: 50px; height: 40px;">
+                            <input id="start_text" type="text" class="form-control" id="recipient-name" placeholder="คลิ๊กทีแผนที่่เพื่อเลือกตำแหน่งต้นทาง" readonly>
+                        </div>
+                        <div class="form-group">
+                            <label for="ตำแหน่่งปลายทาง" class="form-control-label">ตำแหน่งปลายทาง:</label>
+                            <img class="img-rounded" src="http://sysnet.utcc.ac.th/aparcas/icon/end_flag80.png" style="width: 50px; height: 40px;">
+                            <input id="end_text" type="text" class="form-control" id="recipient-name" readonly>
+                        </div>
+                    </form>
+
+                    <div id="map2"></div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    <button type="button" id="clearRoute" class="btn btn-danger" onClick="clearRoute()">ล้าง</button>
+                    <button type="button" id="Search" class="btn btn-success" onClick="generateRoute()">ค้นหา</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+
+    <div class="modal fade" id="modalLogin" role="dialog">
+        <div class="modal-dialog">
+            <!-- Modal content-->
+            <div class="modal-content" style="width: 800px; height: 550px;">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title text-primary">ลงชื่อเข้าใช้สำหรับแอดมิน</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-xs-12">
+                            <div class="well">
+                                <form>
+                                    <div class="form-group">
+                                        <label for="username" class="control-label">Username</label>
+                                        <input type="text" class="form-control" id="username" name="username" value="" required="" title="Please enter you username" placeholder="example@gmail.com">
+                                        <span class="help-block"></span>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="password" class="control-label">Password</label>
+                                        <input type="password" class="form-control" id="password" name="password" value="" required="" title="Please enter your password">
+                                        <span class="help-block"></span>
+                                    </div>
+                                    <div id="loginErrorMsg" class="alert alert-error hide">Wrong username og password</div>
+                                    <div class="checkbox">
+
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <h5 class="text-center" style="color: #ff0000;"><b id = "txtError"></b></h5>
+                    <button onclick="checkLogin()" class="btn btn-success btn-block">Login</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="modal fade" id="modalLogout" role="dialog">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4>ลงชื่อออก <i class="fa fa-lock"></i></h4></div>
+                <div class="modal-body"><i class="fa fa-question-circle"></i>คุณต้องการจะลงชื่อออกใช่หรือไม่</div>
+                <div class="modal-footer"><a onclick="logout()" class="btn btn-primary btn-block">ออกจากระบบ</a></div>
+            </div>
+        </div>
+    </div>
+
+
+
 
 
     <!-- CONTENT-WRAPPER SECTION END-->
@@ -111,27 +208,62 @@
             </div>
         </div>
     </footer>
-
-
-
-
-
-
-
-
-
     <script>
+        var map2;
         var markers = [];
+        var marker_start;
+        var marker_end;
+
+
+        var idClick;
+        var start_icon = 'http://sysnet.utcc.ac.th/aparcas/icon/start_flag80.png';
+        var end_icon = 'http://sysnet.utcc.ac.th/aparcas/icon/end_flag80.png';
+
+
+        $(function() {
+            checkStatus();
+        });
 
         function initMap() {
+
+            var geocoder = new google.maps.Geocoder;
             var thailand = {
                 lat: 13.809469,
                 lng: 100.501765
             };
             var map = new google.maps.Map(document.getElementById('map'), {
-                zoom: 9,
-                center: thailand
+                zoom: 6,
+                center: thailand,
+                mapTypeId: google.maps.MapTypeId.ROADMAP
             });
+
+
+
+            map2 = new google.maps.Map(document.getElementById('map2'), {
+                zoom: 6,
+                center: thailand,
+                mapTypeId: google.maps.MapTypeId.ROADMAP
+            });
+            map2.addListener('click', function(e) {
+                placeMarker(e.latLng, map2);
+                $.getJSON("http://localhost:1337/api/namefromid=" + idClick + "", function(result) {
+
+                    var position = new google.maps.LatLng(result[0].park_lat, result[0].park_long);
+                    if (marker_end == null) {
+                        marker_end = new google.maps.Marker({
+                            position: position,
+                            map: map2,
+                            icon: end_icon
+                        });
+                    } else {
+                        marker_end.setPosition(position);
+                    }
+
+
+                });
+            });
+
+
 
             addMarkerOnMap();
 
@@ -148,10 +280,6 @@
                             var name = result[i].park_name;
 
                             setData(id, name, lat, lon);
-
-
-
-
                         } //for loop
                     } //if
 
@@ -164,58 +292,212 @@
             function setData(id, name, lat, lon) {
 
                 $.getJSON("http://localhost:1337/api/picfromid=" + id, function(res2) {
-                    //console.log("result2: " + res2[0].url);
-                    // var infoWindow = new google.maps.InfoWindow({
 
-                    //     maxWidth: 500
-                    // });
+                    var infoWindow = new google.maps.InfoWindow({
+                        maxWidth: 500
+                    });
                     var marker = new google.maps.Marker({
                         position: new google.maps.LatLng(lat, lon),
                         map: map,
                         icon: new google.maps.MarkerImage('http://maps.google.com/mapfiles/ms/icons/blue-dot.png'),
                         title: name
                     });
+                    marker['park_id'] = id.toString();
+
+
+
                     markers.push(marker);
-                    marker.content = "<p class = 'text-primary text-center'>"+name+" </p>"+
-                    "<img src='"+res2[0].url+"'  class='img-responsive' alt='Card image cap' width='200' height='100'>"
-                    ;
-                    var infoWindow = new google.maps.InfoWindow();
-                    google.maps.event.addListener(marker, 'click', function() {
-                        infoWindow.setContent(this.content);
+                    google.maps.event.addListener(marker, 'click', function(ev) {
+
+                        var content = "<h5 class = 'text-primary text-center'>" + name + " </h5>" +
+                            "<img src='" + res2[0].url + "'  class='img-responsive' alt='Card image cap' width='200' height='100'> <br>" +
+                            "<button class = 'btn btn-info'  style = 'width: 60%' >ตรวจสอบข้อมูล</button>" +
+                            "<button  id = 'setNavigate'  type ='button'  class = 'btn btn-primary'   onClick = 'setNavigate(" + this.park_id + ")' style= 'margin-left: 2px; width: 40%px;'  >นำทาง</buttoon";
+                        infoWindow.setContent(content);
+                        infoWindow.setPosition(ev.latLng);
                         infoWindow.open(this.getMap(), this);
+
+
                     });
                 });
-
             } //setdata
+            function placeMarker(location, m) {
+                if (marker_start != null) {
+                    marker_start.setPosition(location);
+                } else {
+                    marker_start = new google.maps.Marker({
+                        position: location,
+                        map: m,
+                        icon: start_icon
+                    });
+                }
+                geocodeLatLng(geocoder, m, location);
+            }
+
+            function geocodeLatLng(geocoder, map, loc) {
+                var latlng = loc;
+                geocoder.geocode({
+                    'location': latlng
+                }, function(results, status) {
+                    console.log("Status: " + status);
+                    if (status === 'OK') {
+                        if (results[1]) {
+                            addr_txt = results[1].formatted_address;
+                            $('#start_text').val(addr_txt);
+
+                        } else {
+                            window.alert('No results found');
+                        }
+                    } else {
+                        window.alert('Geocoder failed due to: ' + status);
+                    }
+                });
+            }
         } //initMap
 
-        $(function() {
+        function setNavigate(id) {
+            $("#modalNavigate").modal();
+            $.getJSON("http://localhost:1337/api/namefromid=" + id + "", function(result) {
+                $("#end_text").val(result[0].park_name);
+                idClick = id;
 
+            });
+        }
+        $("#modalNavigate").on("shown.bs.modal", function() {
+            google.maps.event.trigger(map2, "resize");
+            $('.modal-content').css('height', $(window).height() * 0.9);
+        });
+        $('#modalNavigate').on('hidden.bs.modal', function() {
+            console.log("test");
+            //clearRoute();
+        });
+        $('#modalLogin').on('hidden.bs.modal', function() {
 
-
-            // $.getJSON("http://localhost:1337/api/pic_info", function(result) {
-            //     if (result.length != 0) {
-            //
-            //
-            //         for (i = 0; i < result.length; i++) {
-            //             var opencard = "<div class='card'> ";
-            //             var img = "<img src='"+result[i].url+"'  class='img-responsive' alt='Card image cap' width='600' height='400'> ";
-            //             var cardtext = "<p class='card-text'>This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p> ";
-            //             var closecard = "</div>";
-            //             var output =  opencard + img + cardtext + closecard;
-            //             $("#album").append(output);
-            //             console.log("output: " + output);
-            //         }
-            //
-            //     }
-            //
-            // });
+            $("#txtError").text("");
 
         });
+
+        var directionsService
+        var directionsDisplay;
+
+        function generateRoute() {
+            clearRoute();
+            directionsService = new google.maps.DirectionsService;
+            directionsDisplay = new google.maps.DirectionsRenderer;
+            directionsDisplay.setMap(map2);
+            //directionsDisplay.setPanel(document.getElementById('routeContent'));
+            calculateAndDisplayRoute(directionsService, directionsDisplay);
+        }
+
+        function clearRoute() {
+            if (directionsDisplay != null) {
+                //$('#start_text').html("");
+                document.getElementById("start_text").innerHTML = "";
+                directionsDisplay.setMap(null);
+                directionsDisplay = null;
+                if (marker_start != null) {
+                    marker_start.setMap(map2);
+                    marker_end.setMap(map);
+                }
+
+                idClick = 0;
+
+
+
+            }
+
+            // document.getElementById("detailBtn").style.display = "none";
+            // document.getElementById("routeContent").innerHTML = "";
+        }
+
+        function calculateAndDisplayRoute(directionsService, directionsDisplay) {
+            directionsService.route({
+                origin: marker_start.getPosition(),
+                destination: marker_end.getPosition(),
+                optimizeWaypoints: true,
+                travelMode: 'DRIVING'
+            }, function(response, status) {
+                if (status === 'OK') {
+                    console.log("statusCalculate: " + status);
+                    directionsDisplay.setDirections(response);
+                    var route = response.routes[0];
+                    console.log("response: " + response);
+                    //var summaryPanel = document.getElementById('directions-panel');
+                    //summaryPanel.innerHTML = '';
+                    // For each route, display summary information.
+                    //   for (var i = 0; i < route.legs.length; i++) {
+                    //     var routeSegment = i + 1;
+                    //     summaryPanel.innerHTML += '<b>Route Segment: ' + routeSegment +
+                    //         '</b><br>';
+                    //     summaryPanel.innerHTML += route.legs[i].start_address + ' to ';
+                    //     summaryPanel.innerHTML += route.legs[i].end_address + '<br>';
+                    //     summaryPanel.innerHTML += route.legs[i].distance.text + '<br><br>';
+                    //   }
+                } else {
+                    window.alert('Directions request failed due to ' + status);
+                }
+            });
+        }
+
+
+        function loginButton() {
+            if (window.localStorage.getItem("status") != "admin") {
+                $("#modalLogin").modal();
+            } else {
+                $("#modalLogout").modal();
+            }
+
+        }
+
+        function logout() {
+            window.localStorage.setItem('status', null);
+            window.localStorage.setItem('username', null);
+            window.localStorage.setItem('email', null);
+            $('#modalLogout').modal('toggle');
+            checkStatus();
+            getNotification("pe-7s-smile", "ลงชื่อออกสำเร็จ", "<b>Success</b>");
+
+        }
+
+        function checkLogin() {
+            console.log("checkLogin");
+            var username = $("#username").val();
+            var password = $("#password").val();
+            $.getJSON("http://localhost:1337/api/checkLogin/" + username + "/" + password + "", function(result) {
+                if (result.length > 0) {
+                    window.localStorage.setItem('status', "admin");
+                    window.localStorage.setItem('username', result[0].username);
+                    window.localStorage.setItem('email', result[0].email);
+                    console.log("email: " + window.localStorage.getItem('email'));
+                    $('#modalLogin').modal('toggle');
+                    checkStatus();
+                    getNotification("pe-7s-smile", "ลงชื่อเข้าใช้สำเร็จ", "<b>Success</b>");
+                } else {
+                    console.log("bene");
+                    $("#txtError").text("ไอดีหรือรหัสผ่านผิดพลาด");
+                }
+            });
+        }
+
+        function checkStatus() {
+            if (window.localStorage.getItem('status') == "admin") {
+                $("#loginstatus").text("ลงชื่อออก");
+            } else {
+                $("#loginstatus").text("ลงชื่อเข้าใช้");
+            }
+        }
+
+        function getNotification(micon, mtype, mdata) {
+          $.notify("Hello World: I was added to the bottom.");
+
+
+        }
     </script>
 
 
 </body>
 <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBj9CkUJscOFpdnEzohNPPnc-EteBU2uHY&callback=initMap">
+
 </script>
+
 </html>
