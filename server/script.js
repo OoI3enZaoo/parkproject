@@ -17,6 +17,7 @@ connection.connect(function(error) {
 });
 app.use(express.static(path.join(__dirname, 'public')));
 
+
 app.get('/api/park_tb', function(req, resp) {
     connection.query("SELECT * FROM park_tb", function(error, rows, fields) {
         if (error) {
@@ -93,12 +94,24 @@ app.get('/api/checkLogin/:id/:pwd', function(req, resp) {
     });
 })
 
+app.get('/api/detailfromid=:id', function(req, resp) {
+    connection.query("SELECT * FROM data_info where park_id = " + req.params.id, function(error, rows, fields) {
+        if (error) {
+            console.log("Error query");
+        } else {
+            console.log("Successful query");
+            resp.json(rows);
+        }
+    });
+});
+
 app.get('/home', function(req, res) {
     res.sendFile(path.join(__dirname + '/views/index.html'));
 });
 app.get('/map', function(req, res) {
     res.sendFile(path.join(__dirname + '/views/map.html'));
 });
+
 
 
 app.listen(1337);

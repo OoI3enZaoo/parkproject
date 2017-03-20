@@ -159,22 +159,33 @@ body {
     </footer>
     <script>
         $(function() {
+
           checkStatus();
             $.getJSON("http://localhost:1337/api/pic_info", function(result) {
                 if (result.length != 0) {
-
-
                     for (i = 0; i < result.length; i++) {
-                        var opencard = "<div class='card'> ";
-                        var img = "<img src='"+result[i].url+"'  class='img-responsive' alt='Card image cap' width='600' height='400'> ";
-                        var cardtext = "<p class='card-text'>This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p> ";
-                        var closecard = "</div>";
-                        var output =  opencard + img + cardtext + closecard;
-                        $("#album").append(output);
-                        console.log("email: " + window.localStorage.getItem('email'));
+                      var opencard = "<div class='card'> ";
+                      var img = "<img src='"+result[i].url+"'  class='img-responsive' alt='Card image cap' width='600' height='400'> ";
+                      setTitle(result[i].id,opencard,img);
                     }
                 }
             });
+            function setTitle(id,opencard,img){
+              $.getJSON("http://localhost:1337/api/namefromid="+id,function(result){
+                var parkname = "<h4>"+result[0].park_name+"<h4>"
+                var output = opencard + parkname + img;
+                setDetail(id,output);
+              });
+            }
+            function setDetail(id,output){
+              $.getJSON("http://localhost:1337/api/detailfromid="+id, function(result2) {
+                var cardtext = "<blockquote><p class='card-text'>"+result2[0].detail+" <a href='#'>เพิ่มเติม...</a></p></blockquote> ";
+                var closecard = "</div>";
+                output = output+ cardtext + closecard;
+                $("#album").append(output);
+              });
+
+            }
         });
                 function loginButton() {
                   if(window.localStorage.getItem("status") != "admin"){
