@@ -68,7 +68,7 @@ body {
 
 
             </div>
-
+<!--
             <div class="row">
                <div class="col-md-12">
                    <div class="alert alert-success">
@@ -76,7 +76,7 @@ body {
                    </div>
                </div>
 
-           </div>
+           </div> -->
 
             <div class = "row">
                 <div class ="col-md-12">
@@ -128,7 +128,7 @@ body {
                 </div>
                 <div class="modal-footer">
                     <h5  class = "text-center" style="color: #ff0000;"><b id = "txtError"></b></h5>
-                    <button onclick="checkLogin()" class="btn btn-success btn-block">Login</button>
+                    <button onclick="checkLogin()" class="btn btn-success btn-block">ลงชื่อเข้าใช้</button>
                 </div>
             </div>
         </div>
@@ -146,6 +146,158 @@ body {
     </div>
 
 
+        <div class="modal fade" id="modalEdit" role="dialog">
+            <div class="modal-dialog">
+            <div class="modal-content">
+              <div class="modal-header"><h4 id='editName'> <i class="fa fa-lock"></i></h4></div>
+              <div class="modal-body">
+                <div class="row">
+                    <div class="col-xs-12">
+                        <div class="well">
+                            <form>
+                                <div class="form-group">
+                                    <label for="username" class="control-label" >ข้อมูลย่อ</label>
+                                    <textarea  id = 'edit0' rows="4" cols="50" type="text" class="form-control"></textarea>
+                                    <span class="help-block"></span>
+                                </div>
+                                <div class="form-group">
+                                  <label for="username" class="control-label" >ข้อมูลพื้นฐาน</label>
+                                  <textarea  id = 'edit1' rows="9" cols="50" type="text" class="form-control"></textarea>
+                                  <span class="help-block"></span>
+                                </div>
+                                <div class="form-group">
+                                  <label for="username" class="control-label" >ที่ตั้งและแผนที่</label>
+                                  <textarea  id = 'edit2'rows="2" cols="50" type="text" class="form-control"></textarea>
+                                  <span class="help-block"></span>
+                                </div>
+                                <div class="form-group">
+                                  <label for="username" class="control-label" >หัวหน้าอุทยานแห่งชาติ</label>
+                                  <textarea  id = 'edit3'rows="1" cols="50" type="text" class="form-control"></textarea>
+                                  <span class="help-block"></span>
+                                </div>
+                                <div class="form-group">
+                                  <label for="username" class="control-label" >ลักษณะภูมิประเทศ</label>
+                                  <textarea  id = 'edit4'rows="7" cols="50" type="text" class="form-control"></textarea>
+                                  <span class="help-block"></span>
+                                </div>
+                                <div class="form-group">
+                                  <label for="username" class="control-label" >ลักษณะภูมิอากาศ</label>
+                                  <textarea  id = 'edit5'rows="7" cols="50" type="text" class="form-control"></textarea>
+                                  <span class="help-block"></span>
+                                </div>
+                                <div class="form-group">
+                                  <label for="username" class="control-label" >พืชพรรณไม้และสัตว์ป่า</label>
+                                  <textarea  id = 'edit6'rows="" cols="50" type="text" class="form-control"></textarea>
+                                  <span class="help-block"></span>
+                                </div>
+                                <div class="form-group">
+                                  <label for="username" class="control-label" >จุดเด่นที่น่าสนใจ</label>
+                                  <textarea  id = 'edit7'rows="10" cols="50" type="text" class="form-control"></textarea>
+                                  <span class="help-block"></span>
+                                </div>
+                                <div class="form-group">
+                                  <label for="username" class="control-label" >การเดินทาง</label>
+                                  <textarea  id = 'edit8'rows="10" cols="50" type="text" class="form-control"></textarea>
+                                  <span class="help-block"></span>
+                                </div>
+                                <div class="form-group">
+                                  <label for="username" class="control-label" >อ้างอิงข้อมูล</label>
+                                  <textarea  id = 'edit9'rows="2" cols="50" type="text" class="form-control"></textarea>
+                                  <span class="help-block"></span>
+                                </div>
+                                <div id="loginErrorMsg" class="alert alert-error hide">Wrong username og password</div>
+                                <div class="checkbox">
+
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+
+                </div>
+              </div>
+              <div  class="modal-footer"><a  id= "editSave"class="btn btn-success btn-block">บันทึก</a></div>
+            </div>
+          </div>
+        </div>
+
+
+
+
+        <div class="modal fade" id="modalAdd" role="dialog">
+            <div class="modal-dialog">
+            <div class="modal-content">
+              <div class="modal-header"><h4 id='addName'> <i class="fa fa-lock"></i></h4></div>
+              <div class="modal-body">
+                <div class="row">
+                    <div class="col-xs-12">
+                        <div class="well">
+                            <form>
+                              <div class="form-group">
+                                  <label for="username" class="control-label" >ข้อมูลย่อ</label>
+                                  <textarea  id = 'add0' rows="4" cols="50" type="text" class="form-control"></textarea>
+                                  <span class="help-block"></span>
+                              </div>
+                              <div class="form-group">
+                                <label for="username" class="control-label" >ข้อมูลพื้นฐาน</label>
+                                <textarea  id = 'add1' rows="9" cols="50" type="text" class="form-control"></textarea>
+                                <span class="help-block"></span>
+                              </div>
+                              <div class="form-group">
+                                <label for="username" class="control-label" >ที่ตั้งและแผนที่</label>
+                                <textarea  id = 'add2'rows="2" cols="50" type="text" class="form-control"></textarea>
+                                <span class="help-block"></span>
+                              </div>
+                              <div class="form-group">
+                                <label for="username" class="control-label" >หัวหน้าอุทยานแห่งชาติ</label>
+                                <textarea  id = 'add3'rows="1" cols="50" type="text" class="form-control"></textarea>
+                                <span class="help-block"></span>
+                              </div>
+                              <div class="form-group">
+                                <label for="username" class="control-label" >ลักษณะภูมิประเทศ</label>
+                                <textarea  id = 'add4'rows="7" cols="50" type="text" class="form-control"></textarea>
+                                <span class="help-block"></span>
+                              </div>
+                              <div class="form-group">
+                                <label for="username" class="control-label" >ลักษณะภูมิอากาศ</label>
+                                <textarea  id = 'add5'rows="7" cols="50" type="text" class="form-control"></textarea>
+                                <span class="help-block"></span>
+                              </div>
+                              <div class="form-group">
+                                <label for="username" class="control-label" >พืชพรรณไม้และสัตว์ป่า</label>
+                                <textarea  id = 'add6'rows="" cols="50" type="text" class="form-control"></textarea>
+                                <span class="help-block"></span>
+                              </div>
+                              <div class="form-group">
+                                <label for="username" class="control-label" >จุดเด่นที่น่าสนใจ</label>
+                                <textarea  id = 'add7'rows="10" cols="50" type="text" class="form-control"></textarea>
+                                <span class="help-block"></span>
+                              </div>
+                              <div class="form-group">
+                                <label for="username" class="control-label" >การเดินทาง</label>
+                                <textarea  id = 'add8'rows="10" cols="50" type="text" class="form-control"></textarea>
+                                <span class="help-block"></span>
+                              </div>
+                              <div class="form-group">
+                                <label for="username" class="control-label" >อ้างอิงข้อมูล</label>
+                                <textarea  id = 'add9'rows="2" cols="50" type="text" class="form-control"></textarea>
+                                <span class="help-block"></span>
+                              </div>
+                              <div id="loginErrorMsg" class="alert alert-error hide">Wrong username og password</div>
+                              <div class="checkbox">
+
+                              </div>
+                            </form>
+                        </div>
+                    </div>
+
+                </div>
+              </div>
+              <div  class="modal-footer"><a  id= "addSave"class="btn btn-success btn-block">เพิ่มอุทยาน</a></div>
+            </div>
+          </div>
+        </div>
+
+
     <!-- CONTENT-WRAPPER SECTION END-->
     <footer>
         <div class="container">
@@ -158,8 +310,9 @@ body {
         </div>
     </footer>
     <script>
-        $(function() {
 
+
+var count = 0;
           checkStatus();
             $.getJSON("http://localhost:1337/api/pic_info", function(result) {
                 if (result.length != 0) {
@@ -167,26 +320,94 @@ body {
                       var opencard = "<div class='card'> ";
                       var img = "<img src='"+result[i].url+"'  class='img-responsive' alt='Card image cap' width='600' height='400'> ";
                       setTitle(result[i].id,opencard,img);
+
                     }
                 }
             });
             function setTitle(id,opencard,img){
               $.getJSON("http://localhost:1337/api/namefromid="+id,function(result){
-                var parkname = "<h4>"+result[0].park_name+"<h4>"
+
+                if(window.localStorage.getItem("status") == "admin"){
+                  var parkname = "<h4>"+result[0].park_name+" <button class = 'btn btn-success' onclick = 'addButton("+id+")'>เพิ่ม</button><button class = 'btn btn-warning' onclick = 'editButton("+id+")'>แก้ไข</button><button  class = 'btn btn-danger' onclick = 'deleteButton("+id+")'>ลบ</button><h4>"
+                }else{
+                  var parkname = "<h4>"+result[0].park_name+" <h4>"
+                }
                 var output = opencard + parkname + img;
                 setDetail(id,output);
               });
             }
             function setDetail(id,output){
               $.getJSON("http://localhost:1337/api/detailfromid="+id, function(result2) {
-                var cardtext = "<blockquote><p class='card-text'>"+result2[0].detail+" <a href='#'>เพิ่มเติม...</a></p></blockquote> ";
+                var cardtext = "<blockquote><p class='card-text'>"+result2[0].detail+" <a onclick = 'detailpark("+id+")'>เพิ่มเติม...</a></p></blockquote> ";
                 var closecard = "</div>";
                 output = output+ cardtext + closecard;
                 $("#album").append(output);
+
               });
+            }
+            function detailpark(id){
+              window.localStorage.setItem("id",id);
+              window.open("parkdetail="+id,"_self");
+
 
             }
-        });
+            $("#editSave").click(function(){
+                console.log("save: " +   window.localStorage.getItem("id"));
+            });
+            $("#addSave").click(function(){
+                console.log("save: " +   window.localStorage.getItem("id"));
+            });
+            function addButton(id){
+              $("#modalAdd").modal();
+              $.getJSON("http://localhost:1337/api/namefromid="+id, function(result) {
+                  $("#addName").text(result[0].park_name + "(เพิ่ม)");
+                });
+            }
+            function editButton(id){
+              console.log("test: " + id);
+              window.localStorage.setItem('id', id);
+              $("#modalEdit").modal();
+              $.getJSON("http://localhost:1337/api/namefromid="+id, function(result) {
+                  $("#editName").text(result[0].park_name + "(แก้ไข)");
+                });
+
+              $.getJSON("http://localhost:1337/api/detailfromid="+id, function(result) {
+                  for(i = 0; i<result.length; i++){
+                    if(result[i].title_id == 0){
+                        $("#edit0").text(result[i].detail);
+                    }
+                    else if(result[i].title_id == 1){
+                        $("#edit1").text(result[i].detail);
+                    }
+                    else if(result[i].title_id == 2){
+                        $("#edit2").text(result[i].detail);
+                    }
+                    else if(result[i].title_id == 3){
+                        $("#edit3").text(result[i].detail);
+                    }
+                    else if(result[i].title_id == 4){
+                        $("#edit4").text(result[i].detail);
+                    }
+                    else if(result[i].title_id == 5){
+                        $("#edit5").text(result[i].detail);
+                    }
+                    else if(result[i].title_id == 6){
+                        $("#edit6").text(result[i].detail);
+                    }
+                    else if(result[i].title_id == 7){
+                        $("#edit7").text(result[i].detail);
+                    }
+                    else if(result[i].title_id == 8){
+                        $("#edit8").text(result[i].detail);
+                    }
+                    else if(result[i].title_id == 9){
+                        $("#edit9").text(result[i].detail);
+                    }
+                  }//for
+              });//json
+
+            }
+
                 function loginButton() {
                   if(window.localStorage.getItem("status") != "admin"){
                       $("#modalLogin").modal();
@@ -196,12 +417,14 @@ body {
 
                 }
                 function logout(){
+                  $("button").hide();
                   window.localStorage.setItem('status', null);
                   window.localStorage.setItem('username', null);
                   window.localStorage.setItem('email', null);
                   $('#modalLogout').modal('toggle');
                   checkStatus();
                   getNotification("pe-7s-smile", "ลงชื่อออกสำเร็จ", "<b>Success</b>");
+
 
                 }
 
@@ -211,6 +434,7 @@ body {
                       var password = $("#password").val();
                       $.getJSON("http://localhost:1337/api/checkLogin/" + username + "/" + password + "", function(result) {
                         if (result.length > 0) {
+                          location.reload();
                           window.localStorage.setItem('status', "admin");
                           window.localStorage.setItem('username', result[0].username);
                           window.localStorage.setItem('email', result[0].email);
@@ -218,11 +442,13 @@ body {
                           $('#modalLogin').modal('toggle');
                           checkStatus();
                           getNotification("pe-7s-smile", "ลงชื่อเข้าใช้สำเร็จ", "<b>Success</b>");
+
                         }else{
                           console.log("bene");
                           $("#txtError").text("ไอดีหรือรหัสผ่านผิดพลาด");
                         }
                       });
+
                 }
 
                 function checkStatus() {

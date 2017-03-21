@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>อุทยานแหง่ชาติ</title>
+
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+    <meta name="description" content="" />
+    <meta name="author" content="" />
+    <!--[if IE]>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+        <![endif]-->
+    <title>อุทยานแห่งชาติ</title>
+
+    <link href="bower_components/bootstrap/dist/css/bootstrap.css" rel="stylesheet" />
+    <link href="bower_components/css/style.css" rel="stylesheet" />
+    <link href="bower_components/album/album.css" rel="stylesheet">
+    <script src="bower_components/jquery/dist/jquery.js"></script>
+    <script src="bower_components/bootstrap/dist/js/bootstrap.js"></script>
+    <link href="https://fonts.googleapis.com/css?family=Mitr" rel="stylesheet">
+
+
+</head>
+
+<body>
+
+    <style media="screen">
+        body {
+            font-family: 'Mitr', sans-serif;
+        }
+    </style>
+
+    <body>
+        <header>
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-12">
+                        <h4>อุทยานแห่งประเทศไทย</h4>
+
+                    </div>
+
+                </div>
+            </div>
+        </header>
+
+        <section class="menu-section">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="navbar-collapse collapse ">
+                            <ul id="menu-top" class="nav navbar-nav navbar-right">
+                                <li><a href="home">หน้าหลัก</a></li>
+                                <li><a href="map">แผนที่</a></li>
+                                <li><a href="contact">ติดต่อเรา</a></li>
+                                <li><a id="loginstatus" onclick="loginButton()">ลงชื่อเข้าใช้</a></li>
+
+                            </ul>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+        <!-- MENU SECTION END-->
+        <div class="content-wrapper">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-12">
+                        <h4 id = "title" class="page-head-line"></h4>
+                    </div>
+
+
+                </div>
+
+
+                <div class="row">
+                    <div class="col-md-12">
+                      <div id = "detail">
+
+                        </div>
+                    </div>
+                </div>
+
+
+
+
+            </div>
+        </div>
+
+    </body>
+    <script>
+        $(function() {
+            var id = window.localStorage.getItem("id")
+            console.log("id: " + id);
+            console.log("id2: " + location.search);
+            $.getJSON("http://localhost:1337/api/namefromid=" + id, function(result) {
+                $("#title").text(result[0].park_name);
+            });
+            $.getJSON("http://localhost:1337/api/detailfromid=" + id, function(result) {
+
+              for(i = 0; i<result.length; i++){
+                  var title = "<h4>" + result[i].title+ "</h4>";
+                  var detail =  "<p>" +result[i].detail+ "</p> <br>";;
+                  $("#detail").append(title + detail);
+
+              }
+
+
+            });
+        });
+    </script>
+
+</html>

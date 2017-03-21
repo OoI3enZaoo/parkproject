@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>อุทยานแหง่ชาติ</title>
+
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+    <meta name="description" content="" />
+    <meta name="author" content="" />
+    <!--[if IE]>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+        <![endif]-->
+    <title>อุทยานแห่งชาติ</title>
+
+    <link href="bower_components/bootstrap/dist/css/bootstrap.css" rel="stylesheet" />
+    <link href="bower_components/css/style.css" rel="stylesheet" />
+    <link href="bower_components/album/album.css" rel="stylesheet">
+    <script src="bower_components/jquery/dist/jquery.js"></script>
+    <script src="bower_components/bootstrap/dist/js/bootstrap.js"></script>
+    <link href="https://fonts.googleapis.com/css?family=Mitr" rel="stylesheet">
+
+
+</head>
+
+<body>
+
+    <style media="screen">
+        body {
+            font-family: 'Mitr', sans-serif;
+        }
+    </style>
+
+    <body>
+        <header>
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-12">
+                        <h4>อุทยานแห่งประเทศไทย</h4>
+
+                    </div>
+
+                </div>
+            </div>
+        </header>
+
+        <section class="menu-section">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="navbar-collapse collapse ">
+                            <ul id="menu-top" class="nav navbar-nav navbar-right">
+                                <li><a href="home">หน้าหลัก</a></li>
+                                <li><a href="map">แผนที่</a></li>
+                                <li><a class="menu-top-active" href="contact">ติดต่อเรา</a></li>
+                                <li><a id="loginstatus" onclick="loginButton()">ลงชื่อเข้าใช้</a></li>
+
+                            </ul>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+        <!-- MENU SECTION END-->
+        <div class="content-wrapper">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-12">
+                        <h4 class="page-head-line">ติดต่อเรา</h4>
+                    </div>
+
+
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="form-area">
+                            <form id="contact-form" action="/api/contactsummit" method="post">
+                                <br style="clear:both">
+                                <div class="form-group">
+                                    <input type="text" class="form-control" id="name" name="name" placeholder="ชื่อ" required>
+                                </div>
+                                <div class="form-group">
+                                    <input type="text" class="form-control" id="email" name="email" placeholder="อีเมล" required>
+                                </div>
+                                <div class="form-group">
+                                    <input type="text" class="form-control" id="mobile" name="mobile" placeholder="หมายเลขโทรศัพท์" required>
+                                </div>
+                                <div class="form-group">
+                                    <input type="text" class="form-control" id="subject" name="subject" placeholder="หัวข้อ" required>
+                                </div>
+                                <div class="form-group">
+                                    <textarea class="form-control" type="textarea" id="message" placeholder="ข้อความ" maxlength="140" rows="7"></textarea>
+                                    <span class="help-block"><p id="characterLeft" class="help-block ">ใส่ข้อความอย่างจำกัดไม่เกิน 140 คำ</p></span>
+                                </div>
+                                <button type="submit" id="submit" class="btn btn-primary pull-right">ส่ง</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+
+
+
+
+            </div>
+        </div>
+
+    </body>
+    <script>
+        $(function() {
+            checkStatus();
+
+        });
+
+        function senddata() {
+            alert("ข้อมูลของคุณถูกบันทึกไว้แล้ว")
+            /*  $("#name").val("");
+              $("#email").val("");
+              $("#mobile").val("");
+              $("#subject").val("");
+              $("#message").val("");*/
+        }
+
+        function checkStatus() {
+            if (window.localStorage.getItem('status') == "admin") {
+                $("#loginstatus").text("ลงชื่อออก");
+            } else {
+                $("#loginstatus").text("ลงชื่อเข้าใช้");
+            }
+        }
+    </script>
+
+</html>

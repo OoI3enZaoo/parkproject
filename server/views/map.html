@@ -311,7 +311,7 @@
 
                         var content = "<h5 class = 'text-primary text-center'>" + name + " </h5>" +
                             "<img src='" + res2[0].url + "'  class='img-responsive' alt='Card image cap' width='200' height='100'> <br>" +
-                            "<button class = 'btn btn-info'  style = 'width: 60%' >ตรวจสอบข้อมูล</button>" +
+                            "<button class = 'btn btn-info'  style = 'width: 60%' onclick = 'detailpark("+this.park_id+")'>ตรวจสอบข้อมูล</button>" +
                             "<button  id = 'setNavigate'  type ='button'  class = 'btn btn-primary'   onClick = 'setNavigate(" + this.park_id + ")' style= 'margin-left: 2px; width: 40%px;'  >นำทาง</buttoon";
                         infoWindow.setContent(content);
                         infoWindow.setPosition(ev.latLng);
@@ -321,6 +321,7 @@
                     });
                 });
             } //setdata
+
             function placeMarker(location, m) {
                 if (marker_start != null) {
                     marker_start.setPosition(location);
@@ -354,7 +355,10 @@
                 });
             }
         } //initMap
-
+        function detailpark(id){
+          window.localStorage.setItem("id",id);
+          window.open("parkdetail="+id,"_self");
+        }
         function setNavigate(id) {
             $("#modalNavigate").modal();
             $.getJSON("http://localhost:1337/api/namefromid=" + id + "", function(result) {
