@@ -246,7 +246,7 @@
             });
             map2.addListener('click', function(e) {
                 placeMarker(e.latLng, map2);
-                $.getJSON("http://localhost:1337/api/namefromid=" + idClick + "", function(result) {
+                $.getJSON("http://localhost:1337/api/locationfromid=" + idClick + "", function(result) {
 
                     var position = new google.maps.LatLng(result[0].park_lat, result[0].park_long);
                     if (marker_end == null) {
@@ -361,7 +361,7 @@
         }
         function setNavigate(id) {
             $("#modalNavigate").modal();
-            $.getJSON("http://localhost:1337/api/namefromid=" + id + "", function(result) {
+            $.getJSON("http://localhost:1337/api/locationfromid=" + id + "", function(result) {
                 $("#end_text").val(result[0].park_name);
                 idClick = id;
 
