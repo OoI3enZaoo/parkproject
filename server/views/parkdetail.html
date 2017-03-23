@@ -82,20 +82,15 @@
                         </div>
                     </div>
                 </div>
-
-
-
-
             </div>
         </div>
 
     </body>
     <script>
         $(function() {
-            var id = window.localStorage.getItem("id")
-            console.log("id: " + id);
-            console.log("id2: " + location.search);
-            $.getJSON("http://localhost:1337/api/detailfromid=" + id, function(result) {
+            //var id = window.localStorage.getItem("id")
+            //console.log("id: " + id);
+            $.getJSON("http://localhost:1337/api/getdetail", function(result) {
                 $("#title").text(result[0].park_name);
                 var info = "<h4>ข้อมูลทั้วไป</h4> <p>" + result[0].park_info + "</p> <br>";
                 var position = "<h4>ตำแหน่งที่อยู่</h4> <p>" + result[0].park_position + "</p> <br>";
@@ -106,11 +101,11 @@
                 var interesting = "<h4>จุดที่น่าสนใจ</h4> <p>" + result[0].park_interesting + "</p> <br>";
                 var travelling = "<h4>การเดินทาง</h4> <p>" + result[0].park_travelling + "</p> <br>";
                 var reference = "<h4>อ้างอิง</h4> <p>" + result[0].park_reference + "</p> <br>";
-                $("#detail").append(info+position+master+terrain+climate+wildlife+interesting+travelling+reference);
-
-
+                $("#detail").append(info + position + master + terrain + climate + wildlife + interesting + travelling + reference);
 
             });
+
+
         });
     </script>
 

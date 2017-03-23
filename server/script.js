@@ -22,7 +22,7 @@ app.use(bodyParser.urlencoded({
     extended: false
 }));
 app.use(bodyParser.json());
-app.use(express.static(path.join(__dirname, 'public')));
+app.use(express.static(path.join(__dirname, '/public')));
 
 
 app.get('/', function(req, resp) {
@@ -210,16 +210,8 @@ app.post("/api/addpark", function(req, res) {
             console.log("UPDATE data_info");
         }
     });
-
-
-
-
 });
-
-
-
 app.post("/api/editpark", function(req, res) {
-
     var id = req.body.id;
     var namepark = req.body.namepark;
     var shortinfo = req.body.shortinfo;
@@ -242,10 +234,7 @@ app.post("/api/editpark", function(req, res) {
             console.log("UPDATE data_info2");
         }
     });
-
 });
-
-
 app.get('/home', function(req, res) {
     res.sendFile(path.join(__dirname + '/views/index.html'));
 });
@@ -255,9 +244,26 @@ app.get('/map', function(req, res) {
 app.get('/contact', function(req, res) {
     res.sendFile(path.join(__dirname + '/views/contact.html'));
 });
-app.get('/parkdetail:id', function(req, res) {
+var myid = 1;
+app.get('/parkdetail=:id', function(req, res) {
+    myid = req.params.id;;
     res.sendFile(path.join(__dirname + '/views/parkdetail.html'));
 });
+app.get('/api/getdetail',function(req , res){
+  var query = "SELECT * FROM data_info2 where park_id =" + myid;
+  console.log(query);
+  connection.query(query, function(error, rows, fields) {
+      if (error) {
+          console.log("Error query");
+      } else {
+          console.log("Successful query2");
+          res.json(rows);
+      }
+  });
+
+
+});
+
 
 
 

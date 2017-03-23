@@ -24,6 +24,21 @@
     body {
         font-family: 'Mitr', sans-serif;
     }
+
+    .nav-tabs>li,
+    .nav-pills>li {
+        float: none;
+        display: inline-block;
+        *display: inline;
+        /* ie7 fix */
+        zoom: 1;
+        /* hasLayout ie7 trigger */
+    }
+
+    .nav-tabs,
+    .nav-pills {
+        text-align: center;
+    }
 </style>
 
 <body>
@@ -78,18 +93,35 @@
                 </div>
             </div>
 
-            <div class="row">
-                <div class="col-md-12">
-                    <div id="album"></div>
 
+            <!-- <div id="album"></div>   -->
+
+            <div class="row">
+                <div class="col-xs-12">
+
+                    <div id = "album"></div>
                 </div>
             </div>
 
 
-
-
         </div>
     </div>
+
+    <!-- 
+                  <div class="tabbable tabs-bottom">
+                      <div class="tab-content">
+                          <div class="tab-pane active" id="home">
+                          </div>
+                      </div>
+
+                      <ul class="nav nav-tabs">
+                          <li class="active"><a href="#home" data-toggle="tab">1</a></li>
+                          <li><a href="#about" data-toggle="tab">2</a></li>
+                          <li><a href="#services" data-toggle="tab">3</a></li>
+                          <li><a href="#contact" data-toggle="tab">4</a></li>
+                      </ul>
+                  </div>
+                   -->
 
 
 
@@ -349,7 +381,8 @@
         checkStatus();
 
         $("#testbtn").click(function() {
-
+            var f = this.files[0];
+            alert(f.size || f.fileSize);
         });
         $.getJSON("http://localhost:1337/api/pic_info", function(result) {
             if (result.length != 0) {
@@ -408,7 +441,7 @@
                     //alert("Data Loaded: " + data);
 
                 });
-                location.reload();
+            location.reload();
         });
         $("#addSave").click(function() {
             console.log("save: " + window.localStorage.getItem("id"));
@@ -449,21 +482,21 @@
             $("#modalEdit").modal();
 
             $.getJSON("http://localhost:1337/api/detailfromid=" + id, function(result) {
-                    $("#editName").text(result[0].park_name + "(แก้ไข)");
-                    $("#editx1").text(result[0].park_name);
-                    $("#editx2").text(result[0].park_lat);
-                    $("#editx3").text(result[0].park_long)
-                    $("#edit0").text(result[0].park_shortinfo);
-                    $("#edit1").text(result[0].park_info);
-                    $("#edit2").text(result[0].park_position);
-                    $("#edit3").text(result[0].park_master);
-                    $("#edit4").text(result[0].park_terrain);
-                    $("#edit5").text(result[0].park_climate);
-                    $("#edit6").text(result[0].park_wildlife);
-                    $("#edit7").text(result[0].park_interesting);
-                    $("#edit8").text(result[0].park_travelling);
-                    $("#edit9").text(result[0].park_reference);
-        }); //json
+                $("#editName").text(result[0].park_name + "(แก้ไข)");
+                $("#editx1").text(result[0].park_name);
+                $("#editx2").text(result[0].park_lat);
+                $("#editx3").text(result[0].park_long)
+                $("#edit0").text(result[0].park_shortinfo);
+                $("#edit1").text(result[0].park_info);
+                $("#edit2").text(result[0].park_position);
+                $("#edit3").text(result[0].park_master);
+                $("#edit4").text(result[0].park_terrain);
+                $("#edit5").text(result[0].park_climate);
+                $("#edit6").text(result[0].park_wildlife);
+                $("#edit7").text(result[0].park_interesting);
+                $("#edit8").text(result[0].park_travelling);
+                $("#edit9").text(result[0].park_reference);
+            }); //json
 
         }
 
