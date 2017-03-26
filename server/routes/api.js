@@ -103,6 +103,16 @@ app.get('/detailfromid=:id', function(req, resp) {
     });
 });
 
+app.get('/namefromid=:id', function(req, resp) {
+    connection.query("SELECT park_name FROM data_info2 where park_id = " + req.params.id, function(error, rows, fields) {
+        if (error) {
+            console.log("Error query");
+        } else {
+            console.log("Successful query");
+            resp.json(rows);
+        }
+    });
+});
 
 
 

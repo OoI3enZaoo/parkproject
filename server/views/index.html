@@ -16,11 +16,10 @@
     <link href="../bower_components/album/album.css" rel="stylesheet">
 
     <link href="https://fonts.googleapis.com/css?family=Mitr" rel="stylesheet">
-    <!-- <script src="../bower_components/jquery/dist/jquery.js"></script> -->
-    <script type="text/javascript" src="http://code.jquery.com/jquery-1.9.1.js"></script>
+    <script src="../bower_components/jquery/dist/jquery.js"></script>
+    <!-- <script type="text/javascript" src="http://code.jquery.com/jquery-1.9.1.js"></script> -->
     <script src="../bower_components/bootstrap/dist/js/bootstrap.js"></script>
-    <script type="text/javascript" src="../bower_components/panorama/jquery.panorama_viewer.js"></script>
-    <link href='../bower_components/panorama/panorama_viewer.css' rel='stylesheet' type='text/css'>
+
 
 
 
@@ -103,16 +102,6 @@
             <!-- <div id="album"></div>   -->
 
 
-            <div class="row">
-                <div class="col-xs-12">
-                    <div class="panorama">
-                        <img src="../panorama/park_1.jpg">
-                        <div class="credit">
-                            Photo by DAVID ILIFF. License: CC-BY-SA 3.0
-                        </div>
-                    </div>
-                </div>
-            </div>
 
             <div class="row">
                 <div class="col-xs-12">
@@ -198,7 +187,18 @@
         </div>
     </div>
 
-
+    <div class="modal fade" id="modalRemove" role="dialog">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 id='editNameRemove'> <i class="fa fa-lock"></i></h4></div>
+                <div class="modal-body"><i class="fa fa-question-circle"></i>
+                    <p id='removeAsk'></p>
+                </div>
+                <div class="modal-footer"><a id="removeSave" class="btn btn-primary btn-block">ลบ</a><br><a id="removeSave" class="btn btn-default" data-dismiss="modal">ปิด</a></div>
+            </div>
+        </div>
+    </div>
     <div class="modal fade" id="modalEdit" role="dialog">
         <div class="modal-dialog">
             <div class="modal-content">
@@ -286,7 +286,7 @@
 
                     </div>
                 </div>
-                <div class="modal-footer"><a id="editSave" class="btn btn-success btn-block">บันทึก</a></div>
+                <div class="modal-footer"><a id="editSave" class="btn btn-success btn-block">บันทึก</a><br><a id="removeSave" class="btn btn-default" data-dismiss="modal">ปิด</a></div>
             </div>
         </div>
     </div>
@@ -308,6 +308,11 @@
                                     <div class="form-group">
                                         <label for="username" class="control-label">ชื่อสถานที่ท่องเที่ยว</label>
                                         <textarea id='addx1' rows="1" cols="50" type="text" class="form-control"></textarea>
+                                        <span class="help-block"></span>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="username" class="control-label">รูปประจำสถานที่ท่องเที่ยว</label>
+                                        <textarea id='addx0' rows="1" cols="50" type="text" class="form-control"></textarea>
                                         <span class="help-block"></span>
                                     </div>
                                     <div class="form-group">
@@ -380,7 +385,7 @@
 
                     </div>
                 </div>
-                <div class="modal-footer"><a id="addSave" class="btn btn-success btn-block">เพิ่มอุทยาน</a></div>
+                <div class="modal-footer"><a id="addSave" class="btn btn-success btn-block">เพิ่มอุทยาน</a><br><a id="removeSave" class="btn btn-default" data-dismiss="modal">ปิด</a></div>
             </div>
         </div>
     </div>
@@ -401,14 +406,10 @@
         var count = 0;
         checkStatus();
 
-        $(function() {
-            $(".panorama").panorama_viewer({
-                repeat: true
-            });
-        });
+
         $("#testbtn").click(function() {
             $.getJSON("http://localhost:1337/manage/tests", function(result) {
-              console.log("result: " + JSON.stringify(result));
+                console.log("result: " + JSON.stringify(result));
             });
         });
         $.getJSON("http://localhost:1337/api/pic_info", function(result) {
@@ -423,9 +424,10 @@
         });
 
         function setTitle(id, opencard, img) {
-            $.getJSON("http://localhost:1337/api/detailfromid=" + id, function(result) {
+            var query = "http://localhost:1337/api/detailfromid=" + id;
+            $.getJSON(query, function(result) {
                 if (window.localStorage.getItem("status") == "admin") {
-                    var parkname = "<h4>" + result[0].park_name + " <button  id = 'adminbutton' class = 'btn btn-danger pull-right' onclick = 'deleteButton(" + id +
+                    var parkname = "<h4>" + result[0].park_name + " <button  id = 'adminbutton' class = 'btn btn-danger pull-right' onclick = 'removeButton(" + id +
                         ")'>ลบ</button><button id = 'adminbutton' class = 'btn btn-warning pull-right' onclick = 'editButton(" + id + ")'>แก้ไข</button><h4>"
                 } else {
                     var parkname = "<h4>" + result[0].park_name + " <h4>"
@@ -446,6 +448,16 @@
 
 
         }
+        $("#removeSave").click(function() {
+            console.log("remove Button");
+            $.post("/manage/removepark", {
+                    id: window.localStorage.getItem("id")
+                })
+                .done(function(data) {
+                    alert("Data Loaded: " + data);
+                });
+            location.reload();
+        });
         $("#editSave").click(function() {
             console.log("namepark: " + $("#editx1").val());
             $.post("/manage/editpark", {
@@ -464,18 +476,17 @@
                     lat: $("#editx2").val(),
                     long: $("#editx3").val()
                 })
-                .done(function() {
-                    //alert("Data Loaded: " + data);
+                .done(function(data) {
+                    alert("Data Loaded: " + data);
 
                 });
             location.reload();
         });
         $("#addSave").click(function() {
             console.log("save: " + window.localStorage.getItem("id"));
-
-
-            $.post("/api/addpark", {
+            $.post("/manage/addpark", {
                     id: window.localStorage.getItem("id"),
+                    urlpic: $("#addx0").val(),
                     namepark: $("#addx1").val(),
                     shortinfo: $("#add0").val(),
                     info: $("#add1").val(),
@@ -490,16 +501,31 @@
                     lat: $("#addx2").val(),
                     long: $("#addx3").val()
                 })
-                .done(function(data) {
-                    //alert("Data Loaded: " + data);
-                    location.reload();
+                .always(function(data) {
+                    if (data == "ok") {
+                        alert("ttetstt");
+                    } else if (data == "err") {
+                        //handle server-side errors
+                    } else {
+                        //handle client-side errors like 404 errors
+                    }
                 });
+
+            location.reload();
 
         });
 
         function addButton() {
             $("#modalAdd").modal();
+        }
 
+        function removeButton(id) {
+            $.getJSON("http://localhost:1337/api/namefromid=" + id, function(result) {
+                $("#removeAsk").text("คุณแน่ใจไหมว่าจะลบ " + result[0].park_name + "?")
+                $("#editNameRemove").text(result[0].park_name);
+                window.localStorage.setItem('id', id);
+                $("#modalRemove").modal();
+            });
 
         }
 

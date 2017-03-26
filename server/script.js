@@ -45,7 +45,6 @@ app.get('/apii/getdetail',function(req , res){
       }
   });
 });
-
 app.get('/', function(req, resp) {
   resp.redirect("/home");
 });
@@ -61,7 +60,9 @@ app.get('/map', function(req, res) {
 app.get('/contact', function(req, res) {
     res.sendFile(path.join(__dirname + '/views/contact.html'));
 });
-
+app.get('/panorama', function(req, res) {
+    res.sendFile(path.join(__dirname + '/views/panorama.html'));
+});
 var manage = require('./routes/manage.js');
 app.use('/manage', manage);
 

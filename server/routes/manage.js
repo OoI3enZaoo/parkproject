@@ -16,7 +16,7 @@ var connection = mysql.createConnection({
 });
 
 app.get('/', function(req, res) {
-  res.send("/adddpark to add a park <br> /editpark to edit a park <br> /removepark to remove a park");
+    res.send("/adddpark to add a park <br> /editpark to edit a park <br> /removepark to remove a park");
 });
 app.post("/addpark", function(req, res) {
     var id = req.body.id;
@@ -33,25 +33,41 @@ app.post("/addpark", function(req, res) {
     var reference = req.body.reference;
     var lat = req.body.lat;
     var long = req.body.long;
+    var urlpic = req.body.urlpic;
 
-    var parkid;
+    var parkid = 0;
 
     connection.query("SELECT MAX(park_id) as max FROM data_info2", function(error, rows, fields) {
+      parkid = rows[0].max + 1;
         if (error) {
-            console.log("Error query");
+            console.log("SELECT MAX Error query");
         } else {
-            console.log("UPDATE data_info");
+            console.log("SELECT MAX park_id: " + parkid);
         }
-        parkid = rows[0].max + 1;
+
+        var mquery = "INSERT INTO data_info2 VALUES(" + parkid + ",'" + namepark + "','" + shortinfo + "','" + info + "','" + map + "','" + master + "','" + terrain + "','" + climate + "','" + plant_and_wildlife + "','" + interesting_point + "','" + travelling + "','" + reference + "','" + lat + "','" + long + "')";
+        connection.query(mquery, function(error, rows, fields) {
+            if (error) {
+                console.log("Error query");
+            } else {
+                console.log("UPDATE data_info");
+            }
+
+        });
+
+        var mquery2 = "INSERT INTO pic_info VALUES(" + parkid + ",'" + urlpic + "')";
+        connection.query(mquery2, function(error, rows, fields) {
+            if (error) {
+                console.log("Error query");
+            } else {
+                console.log("UPDATE pic_info");
+            }
+
+        });
+
+
     });
-    var mquery = "INSERT INTO data_info VALUES  (" + parkid + "," + parkid + ",0,'"+shortinfo+")";
-    connection.query(mquery, function(error, rows, fields) {
-        if (error) {
-            console.log("Error query");
-        } else {
-            console.log("UPDATE data_info");
-        }
-    });
+
 });
 app.post("/editpark", function(req, res) {
     var id = req.body.id;
@@ -68,7 +84,7 @@ app.post("/editpark", function(req, res) {
     var reference = req.body.reference;
     var lat = req.body.lat;
     var long = req.body.long;
-    var query  = "UPDATE data_info2 SET park_id = " + id + " , park_name = '" + namepark + "' , park_shortinfo  = '"+shortinfo+"' , park_info ='"+info+"' , park_position = '"+map+"', park_master = '"+master+"' , park_terrain ='"+terrain+"', park_climate='"+climate+"' , park_wildlife='"+plant_and_wildlife+"' , park_interesting='"+interesting_point+"' , park_travelling = '"+travelling+"' , park_reference= '"+reference+"', park_lat = '"+lat+"' , park_long='"+long+"'  WHERE park_id = " + id;
+    var query = "UPDATE data_info2 SET park_name = '" + namepark + "' , park_shortinfo  = '" + shortinfo + "' , park_info ='" + info + "' , park_position = '" + map + "', park_master = '" + master + "' , park_terrain ='" + terrain + "', park_climate='" + climate + "' , park_wildlife='" + plant_and_wildlife + "' , park_interesting='" + interesting_point + "' , park_travelling = '" + travelling + "' , park_reference= '" + reference + "', park_lat = '" + lat + "' , park_long='" + long + "'  WHERE park_id = " + id;
     connection.query(query, function(error, rows, fields) {
         if (error) {
             console.log("Error query");
@@ -76,8 +92,28 @@ app.post("/editpark", function(req, res) {
             console.log("UPDATE data_info2");
         }
     });
-    console.log("test");
+    console.log(query);
     //res.send("test");
 });
 
+
+app.post("/removepark", function(req, res) {
+    var id = req.body.id;
+    var query = "DELETE FROM data_info2 WHERE park_id ="+id+"";
+    connection.query(query, function(error, rows, fields) {
+        if (error) {
+            console.log("Error query");
+        } else {
+            console.log("REMOVE data_info2");
+        }
+    });
+    var query = "DELETE FROM pic_info WHERE id ="+id+"";
+    connection.query(query, function(error, rows, fields) {
+        if (error) {
+            console.log("Error query");
+        } else {
+            console.log("REMOVE pic_info");
+        }
+    });
+});
 module.exports = app;
