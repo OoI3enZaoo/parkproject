@@ -74,13 +74,74 @@
 
                 </div>
 
+                <div class="row">
+                    <div class="col-md-12">
+                        <div id="panoramaclick">
+                        </div>
 
+                    </div>
+                </div>
                 <div class="row">
                     <div class="col-md-12">
                         <div id="detail">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+
+
+
+        <div class="modal fade" id="modalLogin" role="dialog">
+            <div class="modal-dialog">
+                <!-- Modal content-->
+                <div class="modal-content" style="width: 800px; height: 550px;">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        <h4 class="modal-title text-primary">ลงชื่อเข้าใช้สำหรับแอดมิน</h4>
+                    </div>
+                    <div class="modal-body">
+                        <div class="row">
+                            <div class="col-xs-12">
+                                <div class="well">
+                                    <form>
+                                        <div class="form-group">
+                                            <label for="username" class="control-label">Username</label>
+                                            <input type="text" class="form-control" id="username" name="username" value="" required="" title="Please enter you username" placeholder="example@gmail.com">
+                                            <span class="help-block"></span>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="password" class="control-label">Password</label>
+                                            <input type="password" class="form-control" id="password" name="password" value="" required="" title="Please enter your password">
+                                            <span class="help-block"></span>
+                                        </div>
+                                        <div id="loginErrorMsg" class="alert alert-error hide">Wrong username og password</div>
+                                        <div class="checkbox">
+
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
 
                         </div>
                     </div>
+                    <div class="modal-footer">
+                        <h5 class="text-center" style="color: #ff0000;"><b id = "txtError"></b></h5>
+                        <button onclick="checkLogin()" class="btn btn-success btn-block">ลงชื่อเข้าใช้</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="modal fade" id="modalLogout" role="dialog">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h4>ลงชื่อออก <i class="fa fa-lock"></i></h4></div>
+                    <div class="modal-body"><i class="fa fa-question-circle"></i>คุณต้องการจะลงชื่อออกใช่หรือไม่</div>
+                    <div class="modal-footer"><a onclick="logout()" class="btn btn-primary btn-block">ออกจากระบบ</a></div>
                 </div>
             </div>
         </div>
@@ -88,9 +149,10 @@
     </body>
     <script>
         $(function() {
+          checkStatus();
             //var id = window.localStorage.getItem("id")
             //console.log("id: " + id);
-            $.getJSON("http://localhost:1337/apii/getdetail", function(result) {
+            $.getJSON("/apii/getdetail", function(result) {
                 $("#title").text(result[0].park_name);
                 var info = "<h4>ข้อมูลทั้วไป</h4> <p>" + result[0].park_info + "</p> <br>";
                 var position = "<h4>ตำแหน่งที่อยู่</h4> <p>" + result[0].park_position + "</p> <br>";
@@ -102,11 +164,34 @@
                 var travelling = "<h4>การเดินทาง</h4> <p>" + result[0].park_travelling + "</p> <br>";
                 var reference = "<h4>อ้างอิง</h4> <p>" + result[0].park_reference + "</p> <br>";
                 $("#detail").append(info + position + master + terrain + climate + wildlife + interesting + travelling + reference);
+                if(result[0].park_id == 1){
+                  console.log("park id = : " + result[0].park_id);
+                  $("#panoramaclick").append("<button type='button' class='btn btn-info pull-right' onclick= 'showPanorama()' >panorama</button>")
+
+                }
 
             });
 
 
         });
+        function showPanorama(){
+          window.open("/panorama", "_blank","toolbar = yes,scrollbars=yes,resizable=yes");
+        }
+        function checkStatus() {
+            if (window.localStorage.getItem('status') == "admin") {
+                $("#loginstatus").text("ลงชื่อออก");
+            } else {
+                $("#loginstatus").text("ลงชื่อเข้าใช้");
+            }
+        }
+        function loginButton() {
+            if (window.localStorage.getItem("status") != "admin") {
+                $("#modalLogin").modal();
+            } else {
+                $("#modalLogout").modal();
+            }
+
+        }
     </script>
 
 </html>

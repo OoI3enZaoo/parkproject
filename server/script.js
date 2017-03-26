@@ -12,9 +12,9 @@ var connection = mysql.createConnection({
 });
 connection.connect(function(error) {
     if (error) {
-        console.log("Error");
+        console.log("MySQL can't connect");
     } else {
-        console.log("Connect");
+        console.log("MySQL has been Connected");
     }
 });
 
@@ -23,8 +23,8 @@ app.use(bodyParser.urlencoded({
 }));
 app.use(bodyParser.json());
 app.use(express.static(path.join(__dirname, '/public')));
-app.use(express.static(path.join(__dirname, '/picture')));
-app.use(express.static(path.join(__dirname, '/routes')));
+//app.use(express.static(path.join(__dirname, '/picture')));
+//app.use(express.static(path.join(__dirname, '/routes')));
 
 
 
@@ -69,4 +69,6 @@ app.use('/manage', manage);
 var api = require('./routes/api.js');
 app.use('/api', api);
 
-app.listen(1337);
+var port = 1337;
+app.listen(port);
+console.log("Server is running on port :" + port);

@@ -408,11 +408,11 @@
 
 
         $("#testbtn").click(function() {
-            $.getJSON("http://localhost:1337/manage/tests", function(result) {
+            $.getJSON("/manage/tests", function(result) {
                 console.log("result: " + JSON.stringify(result));
             });
         });
-        $.getJSON("http://localhost:1337/api/pic_info", function(result) {
+        $.getJSON("/api/pic_info", function(result) {
             if (result.length != 0) {
                 for (i = 0; i < result.length; i++) {
                     var opencard = "<div class='card'> ";
@@ -424,7 +424,7 @@
         });
 
         function setTitle(id, opencard, img) {
-            var query = "http://localhost:1337/api/detailfromid=" + id;
+            var query = "/api/detailfromid=" + id;
             $.getJSON(query, function(result) {
                 if (window.localStorage.getItem("status") == "admin") {
                     var parkname = "<h4>" + result[0].park_name + " <button  id = 'adminbutton' class = 'btn btn-danger pull-right' onclick = 'removeButton(" + id +
@@ -445,8 +445,6 @@
         function detailpark(id) {
             window.localStorage.setItem("id", id);
             window.open("/parkdetail=" + id, "_self");
-
-
         }
         $("#removeSave").click(function() {
             console.log("remove Button");
@@ -520,7 +518,7 @@
         }
 
         function removeButton(id) {
-            $.getJSON("http://localhost:1337/api/namefromid=" + id, function(result) {
+            $.getJSON("/api/namefromid=" + id, function(result) {
                 $("#removeAsk").text("คุณแน่ใจไหมว่าจะลบ " + result[0].park_name + "?")
                 $("#editNameRemove").text(result[0].park_name);
                 window.localStorage.setItem('id', id);
@@ -534,7 +532,7 @@
             window.localStorage.setItem('id', id);
             $("#modalEdit").modal();
 
-            $.getJSON("http://localhost:1337/api/detailfromid=" + id, function(result) {
+            $.getJSON("/api/detailfromid=" + id, function(result) {
                 $("#editName").text(result[0].park_name + "(แก้ไข)");
                 $("#editx1").text(result[0].park_name);
                 $("#editx2").text(result[0].park_lat);
@@ -579,7 +577,7 @@
             console.log("checkLogin");
             var username = $("#username").val();
             var password = $("#password").val();
-            $.getJSON("http://localhost:1337/api/checkLogin/" + username + "/" + password + "", function(result) {
+            $.getJSON("/api/checkLogin/" + username + "/" + password + "", function(result) {
                 if (result.length > 0) {
                     location.reload();
                     window.localStorage.setItem('status', "admin");

@@ -249,7 +249,7 @@
             });
             map2.addListener('click', function(e) {
                 placeMarker(e.latLng, map2);
-                $.getJSON("http://localhost:1337/api/locationfromid=" + idClick + "", function(result) {
+                $.getJSON("/api/locationfromid=" + idClick + "", function(result) {
 
                     var position = new google.maps.LatLng(result[0].park_lat, result[0].park_long);
                     if (marker_end == null) {
@@ -271,7 +271,7 @@
             addMarkerOnMap();
 
             function addMarkerOnMap() {
-                $.getJSON("http://localhost:1337/api/park_tb", function(result) {
+                $.getJSON("/api/park_tb", function(result) {
 
                     if (result.length > 0) {
                         for (i = 0; i < result.length; i++) {
@@ -294,7 +294,7 @@
 
             function setData(id, name, lat, lon) {
 
-                $.getJSON("http://localhost:1337/api/picfromid=" + id, function(res2) {
+                $.getJSON("/api/picfromid=" + id, function(res2) {
 
                     var infoWindow = new google.maps.InfoWindow({
                         maxWidth: 500
@@ -364,7 +364,7 @@
         }
         function setNavigate(id) {
             $("#modalNavigate").modal();
-            $.getJSON("http://localhost:1337/api/locationfromid=" + id + "", function(result) {
+            $.getJSON("/api/locationfromid=" + id + "", function(result) {
                 $("#end_text").val(result[0].park_name);
                 idClick = id;
 
@@ -470,7 +470,7 @@
             console.log("checkLogin");
             var username = $("#username").val();
             var password = $("#password").val();
-            $.getJSON("http://localhost:1337/api/checkLogin/" + username + "/" + password + "", function(result) {
+            $.getJSON("/api/checkLogin/" + username + "/" + password + "", function(result) {
                 if (result.length > 0) {
                     window.localStorage.setItem('status', "admin");
                     window.localStorage.setItem('username', result[0].username);
