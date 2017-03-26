@@ -14,11 +14,11 @@
         <![endif]-->
     <title>อุทยานแห่งชาติ</title>
 
-    <link href="bower_components/bootstrap/dist/css/bootstrap.css" rel="stylesheet" />
-    <link href="bower_components/css/style.css" rel="stylesheet" />
-    <link href="bower_components/album/album.css" rel="stylesheet">
-    <script src="bower_components/jquery/dist/jquery.js"></script>
-    <script src="bower_components/bootstrap/dist/js/bootstrap.js"></script>
+    <link href="../bower_components/bootstrap/dist/css/bootstrap.css" rel="stylesheet" />
+    <link href="../bower_components/css/style.css" rel="stylesheet" />
+    <link href="../bower_components/album/album.css" rel="stylesheet">
+    <script src="../bower_components/jquery/dist/jquery.js"></script>
+    <script src="../bower_components/bootstrap/dist/js/bootstrap.js"></script>
     <link href="https://fonts.googleapis.com/css?family=Mitr" rel="stylesheet">
 
 
@@ -90,7 +90,7 @@
         $(function() {
             //var id = window.localStorage.getItem("id")
             //console.log("id: " + id);
-            $.getJSON("http://localhost:1337/api/getdetail", function(result) {
+            $.getJSON("http://localhost:1337/apii/getdetail", function(result) {
                 $("#title").text(result[0].park_name);
                 var info = "<h4>ข้อมูลทั้วไป</h4> <p>" + result[0].park_info + "</p> <br>";
                 var position = "<h4>ตำแหน่งที่อยู่</h4> <p>" + result[0].park_position + "</p> <br>";

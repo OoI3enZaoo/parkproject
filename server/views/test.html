@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+    <meta name="description" content="" />
+    <meta name="author" content="" />
+    <!--[if IE]>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+        <![endif]-->
+    <title>อุทยานแห่งชาติ</title>
+
+    <link href="../bower_components/bootstrap/dist/css/bootstrap.css" rel="stylesheet" />
+    <link href="../bower_components/css/style.css" rel="stylesheet" />
+    <link href="../bower_components/album/album.css" rel="stylesheet">
+
+    <link href="https://fonts.googleapis.com/css?family=Mitr" rel="stylesheet">
+    <!-- <script src="../bower_components/jquery/dist/jquery.js"></script> -->
+    <script type="text/javascript" src="http://code.jquery.com/jquery-1.9.1.js"></script>
+    <script src="../bower_components/bootstrap/dist/js/bootstrap.js"></script>
+
+    <script type="text/javascript" src="../bower_components/panorama/jquery.panorama_viewer.js"></script>
+    <link href='../bower_components/panorama/panorama_viewer.css' rel='stylesheet' type='text/css'>
+
+
+
+</head>
+
+  <body>
+    <div class="panorama">
+        <img src="../demo_photo.jpg">
+        <div class="credit">
+            Photo by DAVID ILIFF. License: CC-BY-SA 3.0
+        </div>
+    </div>
+
+  </body>
+  <script>
+
+  $(function() {
+      $(".panorama").panorama_viewer({
+          repeat: true
+      });
+  });
+  </script>
+
+</html>

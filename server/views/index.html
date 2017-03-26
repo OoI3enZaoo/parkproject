@@ -11,12 +11,18 @@
         <![endif]-->
     <title>อุทยานแห่งชาติ</title>
 
-    <link href="bower_components/bootstrap/dist/css/bootstrap.css" rel="stylesheet" />
-    <link href="bower_components/css/style.css" rel="stylesheet" />
-    <link href="bower_components/album/album.css" rel="stylesheet">
-    <script src="bower_components/jquery/dist/jquery.js"></script>
-    <script src="bower_components/bootstrap/dist/js/bootstrap.js"></script>
+    <link href="../bower_components/bootstrap/dist/css/bootstrap.css" rel="stylesheet" />
+    <link href="../bower_components/css/style.css" rel="stylesheet" />
+    <link href="../bower_components/album/album.css" rel="stylesheet">
+
     <link href="https://fonts.googleapis.com/css?family=Mitr" rel="stylesheet">
+    <!-- <script src="../bower_components/jquery/dist/jquery.js"></script> -->
+    <script type="text/javascript" src="http://code.jquery.com/jquery-1.9.1.js"></script>
+    <script src="../bower_components/bootstrap/dist/js/bootstrap.js"></script>
+    <script type="text/javascript" src="../bower_components/panorama/jquery.panorama_viewer.js"></script>
+    <link href='../bower_components/panorama/panorama_viewer.css' rel='stylesheet' type='text/css'>
+
+
 
 </head>
 
@@ -96,18 +102,32 @@
 
             <!-- <div id="album"></div>   -->
 
+
             <div class="row">
                 <div class="col-xs-12">
-
-                    <div id = "album"></div>
+                    <div class="panorama">
+                        <img src="../panorama/park_1.jpg">
+                        <div class="credit">
+                            Photo by DAVID ILIFF. License: CC-BY-SA 3.0
+                        </div>
+                    </div>
                 </div>
             </div>
 
+            <div class="row">
+                <div class="col-xs-12">
+
+                    <div id="album"></div>
+                </div>
+            </div>
 
         </div>
+
+
+    </div>
     </div>
 
-    <!-- 
+    <!--
                   <div class="tabbable tabs-bottom">
                       <div class="tab-content">
                           <div class="tab-pane active" id="home">
@@ -284,6 +304,7 @@
                         <div class="col-xs-12">
                             <div class="well">
                                 <form>
+
                                     <div class="form-group">
                                         <label for="username" class="control-label">ชื่อสถานที่ท่องเที่ยว</label>
                                         <textarea id='addx1' rows="1" cols="50" type="text" class="form-control"></textarea>
@@ -380,9 +401,15 @@
         var count = 0;
         checkStatus();
 
+        $(function() {
+            $(".panorama").panorama_viewer({
+                repeat: true
+            });
+        });
         $("#testbtn").click(function() {
-            var f = this.files[0];
-            alert(f.size || f.fileSize);
+            $.getJSON("http://localhost:1337/manage/tests", function(result) {
+              console.log("result: " + JSON.stringify(result));
+            });
         });
         $.getJSON("http://localhost:1337/api/pic_info", function(result) {
             if (result.length != 0) {
@@ -415,13 +442,13 @@
 
         function detailpark(id) {
             window.localStorage.setItem("id", id);
-            window.open("parkdetail=" + id, "_self");
+            window.open("/parkdetail=" + id, "_self");
 
 
         }
         $("#editSave").click(function() {
             console.log("namepark: " + $("#editx1").val());
-            $.post("/api/editpark", {
+            $.post("/manage/editpark", {
                     id: window.localStorage.getItem("id"),
                     namepark: $("#editx1").val(),
                     shortinfo: $("#edit0").val(),
