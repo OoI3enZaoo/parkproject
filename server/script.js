@@ -4,6 +4,8 @@ var app = express();
 var path = require('path');
 var bodyParser = require("body-parser");
 
+
+
 var connection = mysql.createConnection({
     host: "localhost",
     user: "root",
@@ -28,25 +30,27 @@ app.use(express.static(path.join(__dirname, '/public')));
 
 
 
+
+
 var myid = 1;
 app.get('/parkdetail=:id', function(req, res) {
     myid = req.params.id;;
     res.sendFile(path.join(__dirname + '/views/parkdetail.html'));
 });
-app.get('/apii/getdetail',function(req , res){
-  var query = "SELECT * FROM data_info2 where park_id =" + myid;
-  console.log(query);
-  connection.query(query, function(error, rows, fields) {
-      if (error) {
-          console.log("Error query");
-      } else {
-          console.log("Successful query2");
-          res.json(rows);
-      }
-  });
+app.get('/apii/getdetail', function(req, res) {
+    var query = "SELECT * FROM data_info2 where park_id =" + myid;
+    console.log(query);
+    connection.query(query, function(error, rows, fields) {
+        if (error) {
+            console.log("Error query");
+        } else {
+            console.log("Successful query2");
+            res.json(rows);
+        }
+    });
 });
 app.get('/', function(req, resp) {
-  resp.redirect("/home");
+    resp.redirect("/home");
 });
 app.get('/home', function(req, res) {
     res.sendFile(path.join(__dirname + '/views/index.html'));
