@@ -25,7 +25,7 @@ app.use(bodyParser.urlencoded({
 }));
 app.use(bodyParser.json());
 app.use(express.static(path.join(__dirname, '/public')));
-//app.use(express.static(path.join(__dirname, '/picture')));
+app.use(express.static(path.join(__dirname, '/picture')));
 //app.use(express.static(path.join(__dirname, '/routes')));
 
 
