@@ -1,8 +1,10 @@
 var express = require('express');
+var mailer = require('express-mailer');
 var mysql = require('mysql');
 var app = express();
 var path = require('path');
 var bodyParser = require("body-parser");
+
 
 
 
@@ -25,8 +27,9 @@ app.use(bodyParser.urlencoded({
 }));
 app.use(bodyParser.json());
 app.use(express.static(path.join(__dirname, '/public')));
+
 app.use(express.static(path.join(__dirname, '/picture')));
-//app.use(express.static(path.join(__dirname, '/routes')));
+
 
 
 
@@ -67,11 +70,16 @@ app.get('/contact', function(req, res) {
 app.get('/panorama', function(req, res) {
     res.sendFile(path.join(__dirname + '/views/panorama.html'));
 });
+
 var manage = require('./routes/manage.js');
 app.use('/manage', manage);
 
 var api = require('./routes/api.js');
 app.use('/api', api);
+
+var email = require('./routes/sendemail.js')
+app.use('/sendemail',email);
+
 
 var port = 1337;
 app.listen(port);
