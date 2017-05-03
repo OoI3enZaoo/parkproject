@@ -71,6 +71,9 @@ app.get('/panorama', function(req, res) {
     res.sendFile(path.join(__dirname + '/views/panorama.html'));
 });
 
+app.get('/aboutus',function(req,res){
+  res.sendFile(path.join(__dirname + '/views/about.html'));
+})
 var manage = require('./routes/manage.js');
 app.use('/manage', manage);
 

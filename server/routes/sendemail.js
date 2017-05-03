@@ -31,7 +31,7 @@ console.log("name: " + name + " email: " + email + " mobile: " + mobile + " subj
           to: 'Blend.Theerapat@gmail.com', // list of receivers
           subject: subject, // Subject line
           //text: message //, // plaintext body
-           html: "<h3>ชื่อ: "+name+"</h3><h3>อีเมล์:  "+email+"</h3><h3>โทรศัพท์:  "+mobile+"</h3><h3>หัวข้อ: "+subject+"</h3> <h3>"+message+"</h3>" // You can choose to send an HTML body instead
+           html: "<h3>ชื่อ: "+name+"</h3><h3>อีเมล์:  "+email+"</h3><h3>โทรศัพท์:  "+mobile+"</h3><h3>หัวข้อ: "+subject+"</h3> <h3>เนื้อหา: "+message+"</h3>" // You can choose to send an HTML body instead
       };
       transporter.sendMail(mailOptions, function(error, info){
       if(error){
