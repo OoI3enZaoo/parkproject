@@ -1,0 +1,154 @@
+﻿<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+
+
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+    <meta name="description" content="" />
+    <meta name="author" content="" />
+    <!--[if IE]>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+        <![endif]-->
+    <title>อุทยานแห่งชาติ</title>
+
+    <link href="../bower_components/bootstrap/dist/css/bootstrap.css" rel="stylesheet" />
+    <link href="../bower_components/css/style.css" rel="stylesheet" />
+    <link href="../bower_components/album/album.css" rel="stylesheet">
+
+    <link href="https://fonts.googleapis.com/css?family=Mitr" rel="stylesheet">
+    <!-- <script src="../bower_components/jquery/dist/jquery.js"></script> -->
+    <script type="text/javascript" src="http://code.jquery.com/jquery-1.9.1.js"></script>
+    <script src="../bower_components/bootstrap/dist/js/bootstrap.js"></script>
+
+    <script src="../bower_components/bootstrap-notify/js/bootstrap-notify.js"></script>
+    <link href="../bower_components/bootstrap-notify/css/bootstrap-notify.css" rel="stylesheet" />
+
+
+
+</head>
+
+<body>
+
+    <style media="screen">
+        body {
+            font-family: 'Mitr', sans-serif;
+        }
+    </style>
+
+    <body>
+        <header>
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-12">
+                        <h4>อุทยานแห่งประเทศไทย</h4>
+
+                    </div>
+
+                </div>
+            </div>
+        </header>
+
+        <section class="menu-section">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="navbar-collapse">
+                            <ul id="menu-top" class="nav navbar-nav navbar-right">
+                                <li><a href="home">หน้าหลัก</a></li>
+                                <li><a href="map">แผนที่</a></li>
+                                <li><a href="contact">ติดต่อเรา</a></li>
+                                <li><a class="menu-top-active" href="aboutus">เกียวกับเรา</a></li>
+                                <li><a id="loginstatus" onclick="loginButton()">ลงชื่อเข้าใช้</a></li>
+
+                            </ul>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+
+
+
+<div class="content-wrapper">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <h4 class="page-head-line">เกี่ยวกับเรา</h4>
+                </div>
+
+
+                  <h4 class = "text-center text-primary">Project วิชา Software Engineering โดยนักศึกษาชั้นปีที่ 3 <br><br>สาขาวิชาวิทยาการคอมพิวเตอร์ มหาวิทยาลัยหอการค้าไทย</h4>
+                  <br><br>
+                    <div class="col-lg-4 col-sm-6 text-center">
+                        <img style="margin-left: 55px"class="img-circle img-responsive img-center" src="https://graph.facebook.com/100001136878744/picture?width=200&height=200" alt="">
+                        <h3>รัตนพล เปียแก้ว
+                            <small>ScrumMaster</small>
+                        </h3>
+                        <!-- <p>ควบคุมดูแล</p> -->
+                    </div>
+                    <div class="col-lg-4 col-sm-6 text-center">
+                        <img style="margin-left: 55px"class="img-circle img-responsive img-center" src="https://graph.facebook.com/100001511836248/picture?width=200&height=200" alt="">
+                        <h3>ธีระภัทร วิจิตรภู
+                            <small>Developer</small>
+                        </h3>
+                        <!-- <p>โครตหล่อ</p> -->
+                    </div>
+                    <div class="col-lg-4 col-sm-6 text-center">
+                        <img style="margin-left: 55px"class="img-circle img-responsive img-center" src="https://graph.facebook.com/100002198084055/picture?width=200&height=200" alt="">
+                        <h3>ณัทวุฒน์ ลำคงคา
+                            <small>System Analyst</small>
+                        </h3>
+                        <!-- <p>อย่าตีปู</p> -->
+                    </div>
+
+                    <div class="col-lg-4 col-sm-6 text-center">
+                      <br><br>
+                        <img style="margin-left: 55px"class="img-circle img-responsive img-center" src="../about/loft.jpg" height="200" width="200" alt="">
+                        <h3>ศิขรินทร์ พงษ์สมบัติ
+                            <small>Technical Support</small>
+                        </h3>
+                        <!-- <p>อ้วน</p> -->
+                    </div>
+                    <div class="col-lg-4 col-sm-6 text-center">
+                      <br><br>
+                        <img style="margin-left: 55px"class="img-circle img-responsive img-center" src="../about/big.jpg" height="200" width="200" alt="">
+                        <h3>สิริฤกษ์ อัศวศิริวิลาศ
+                            <small>Designer</small>
+                        </h3>
+                        <!-- <p>หัวร้อน</p> -->
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+    </body>
+    <script>
+        $(function() {
+            checkStatus();
+
+        });
+
+        function loginButton() {
+            if (window.localStorage.getItem("status") != "admin") {
+                $("#modalLogin").modal();
+            } else {
+                $("#modalLogout").modal();
+            }
+        }
+
+        function checkStatus() {
+            if (window.localStorage.getItem('status') == "admin") {
+                $("#loginstatus").text("ลงชื่อออก");
+            } else {
+                $("#loginstatus").text("ลงชื่อเข้าใช้");
+            }
+        }
+    </script>
+
+</html>

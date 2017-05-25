@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title></title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+    <meta name="description" content="" />
+    <meta name="author" content="" />
+    <!--[if IE]>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+        <![endif]-->
+    <title>อุทยานแห่งชาติ</title>
+
+    <script type="text/javascript" src="http://code.jquery.com/jquery-1.9.1.js"></script>
+
+    <script type="text/javascript" src="../bower_components/panorama/jquery.panorama_viewer.js"></script>
+    <link href='../bower_components/panorama/panorama_viewer.css' rel='stylesheet' type='text/css'>
+
+</head>
+<body>
+
+              <div class="panorama">
+                  <img src="../panorama/1.jpg" alt = "panorama">
+                  <div class="credit">
+                      Photo by makejack
+                  </div>
+
+</div>
+              <div class="panorama">
+                  <img src="../panorama/3.jpg" alt = "panorama">
+                  <div class="credit">
+                      Photo by makejack
+                  </div>
+
+      </div>
+
+              <div class="panorama">
+                  <img src="../panorama/2.jpg" alt = "panorama">
+                  <div class="credit">
+                      Photo by makejack
+                  </div>
+              </div>
+
+
+
+
+
+
+
+
+
+
+</body>
+<script type="text/javascript">
+$(function() {
+    $(".panorama").panorama_viewer({
+        repeat: true
+    });
+});
+</script>
+</html>

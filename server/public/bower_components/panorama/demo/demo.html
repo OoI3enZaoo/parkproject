@@ -1,0 +1,31 @@
+<!doctype html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>jQuery Panorama Viewer by Pete R. | The Pete Design</title>
+
+	<script type="text/javascript" src="http://code.jquery.com/jquery-1.9.1.js"></script>
+  <script type="text/javascript" src="jquery.panorama_viewer.js"></script>
+  <link href='panorama_viewer.css' rel='stylesheet' type='text/css'>
+
+</head>
+<body>
+ 
+      <div class="panorama">
+  	   <img src="demo_photo.jpg">
+  	   <div class="credit">
+  	     Photo by DAVID ILIFF. License: CC-BY-SA 3.0
+  	   </div>
+  	  </div>  
+</body>
+  
+  <script>
+  // Use $(window).load() on live site instead of document ready. This is for the purpose of running locally only
+    $(document).ready(function(){
+      $(".panorama").panorama_viewer({
+        repeat: true
+      });
+    });
+    
+  </script>
+</html>

@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <style>
+    #map {
+         position: relative;
+         width: 100%;
+         height: 88vh;
+         margin: 0;
+         padding: 0;
+     }
+    </style>
+  </head>
+  <body>
+    <h3>My Google Maps Demo by ben</h3>
+    <div id="map"></div>
+    <script>
+      function initMap() {
+        var thailand = {lat: 13.809469, lng: 100.501765};
+        var map = new google.maps.Map(document.getElementById('map'), {
+          zoom: 9,
+          center: thailand
+        });
+        var marker = new google.maps.Marker({
+          position: new google.maps.LatLng(13.756331, 100.501765),
+          map: map
+        });
+        var marker = new google.maps.Marker({
+          position: new google.maps.LatLng(14.191647, 100.486794),
+          map: map
+        });
+      }
+    </script>
+    <script async defer
+    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBj9CkUJscOFpdnEzohNPPnc-EteBU2uHY&callback=initMap">
+    </script>
+  </body>
+</html>

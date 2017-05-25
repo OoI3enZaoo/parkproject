@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+    <meta name="description" content="" />
+    <meta name="author" content="" />
+    <!--[if IE]>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+        <![endif]-->
+    <title>อุทยานแห่งชาติ</title>
+
+    <link href="../bower_components/bootstrap/dist/css/bootstrap.css" rel="stylesheet" />
+    <link href="../bower_components/css/style.css" rel="stylesheet" />
+    <link href="../bower_components/album/album.css" rel="stylesheet">
+
+    <link href="https://fonts.googleapis.com/css?family=Mitr" rel="stylesheet">
+    <script src="../bower_components/jquery/dist/jquery.js"></script>
+    <!-- <script type="text/javascript" src="http://code.jquery.com/jquery-1.9.1.js"></script> -->
+    <script src="../bower_components/bootstrap/dist/js/bootstrap.js"></script>
+
+  </head>
+
+  <body>
+
+    <div class = "container">
+        <div class= "row">
+          <div class = "col-sm-12">
+            <h2>test</h2>
+          </div>
+        </div>
+    </div>
+  </body>
+  <script type="text/javascript">
+  $.getJSON("http://localhost:1338/contactlist3",function(result){
+
+      for(i = 0; i<result.length; i ++){
+        console.log("name: " + result[i].url);
+      }
+
+  });
+  </script>
+</html>

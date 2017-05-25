@@ -1,0 +1,22 @@
+{
+  "name": "apple",
+  "authors": [
+    "OoI3enZaoO <Teerapath-Ben@hotmail.com>"
+  ],
+  "description": "",
+  "main": "",
+  "license": "MIT",
+  "homepage": "",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "bootstrap": "^3.3.7",
+    "bootstrap-notify": "^0.2.0",
+    "jquery": "^3.2.1"
+  }
+}
